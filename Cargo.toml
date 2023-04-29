@@ -1,0 +1,35 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[package]
+name = "bevy_game" # ToDo
+version = "0.1.0"
+publish = false
+authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
+edition = "2021"
+exclude = ["dist", "build", "assets", "credits"]
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+lto = true
+codegen-units = 1
+
+[build-dependencies]
+embed-resource = "2"
+
+[features]
+dev = [
+    "bevy/dynamic_linking",
+]
+
+[dependencies]
+bevy = { version = "0.10" }
+game = {path = "crates/game"}
+window = {path = "crates/window"}
+asset_loading = {path = "crates/asset_loading"}
